@@ -52,17 +52,15 @@ int NumeroMaisRepetidoNaive(vector<int> vetor, int tamanho){
     for(int i = 0; i < tamanho; i++)
     {
         int ContadorAtual = 1;
-        if(vetor[i] != NumeroMaisRepetido)
+        for(int j = i + 1; j < tamanho; j++)
         {
-            for(int j = i + 1; j < tamanho; j++)
-            {
-                if(vetor[j] == vetor[i]) ContadorAtual++;
-            }
-            if(ContadorAtual > ContadorTotal)
-            {
-                ContadorTotal = ContadorAtual;
-                NumeroMaisRepetido = vetor[i];
-            }
+            if(vetor[j] == vetor[i]) ContadorAtual++;
+        }
+        
+        if(ContadorAtual > ContadorTotal)
+        {
+            ContadorTotal = ContadorAtual;
+            NumeroMaisRepetido = vetor[i];
         }
     }
     return NumeroMaisRepetido;
