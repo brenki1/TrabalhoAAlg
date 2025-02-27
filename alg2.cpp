@@ -52,16 +52,17 @@ int NumeroMaisRepetidoNaive(vector<int> vetor, int tamanho){
     for(int i = 0; i < tamanho; i++)
     {
         int ContadorAtual = 1;
-        for(int j = i + 1; j < tamanho; j++)
-        {
-            if(vetor[j] == vetor[i]) ContadorAtual++;
-        }
+       
+            for(int j = i + 1; j < tamanho; j++)
+            {
+                if(vetor[j] == vetor[i]) ContadorAtual++;
+            }
+            if(ContadorAtual > ContadorTotal)
+            {
+                ContadorTotal = ContadorAtual;
+                NumeroMaisRepetido = vetor[i];
+            }
         
-        if(ContadorAtual > ContadorTotal)
-        {
-            ContadorTotal = ContadorAtual;
-            NumeroMaisRepetido = vetor[i];
-        }
     }
     return NumeroMaisRepetido;
 }
@@ -105,13 +106,13 @@ int main()
 
         vector<int> v = Gerador_De_Vetor(n);
 
-        /*clock_t inicioNaive = clock();
+        clock_t inicioNaive = clock();
         int resultadoNaive = NumeroMaisRepetidoNaive(v, n);
         clock_t fimNaive = clock();
         double tempoNaiveSeg = double(fimNaive - inicioNaive) / CLOCKS_PER_SEC;
 
         cout << "Metodo | Resultado | Tempo (segundos) | Tempo (milissegundos)" << endl;
-        cout << "Ingenuo | " << resultadoNaive << " | " << tempoNaiveSeg << endl;*/
+        cout << "Ingenuo | " << resultadoNaive << " | " << tempoNaiveSeg << endl;
 
         clock_t inicioDAC = clock();
         int resultadoDAC = NumeroMaisRepetidoDivAndConquer(v, 0, n - 1);
