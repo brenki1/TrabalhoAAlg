@@ -45,7 +45,7 @@ vector<int> Gerador_De_Vetor2(int tamanho){
     return v;
 }
 
-int NumeroMaisRepetidoNaive(vector<int> vetor, int tamanho){
+int NumeroMaisRepetidoNaive(vector<int>& vetor, int tamanho){
     int NumeroMaisRepetido = 0;
     int ContadorTotal = 0;
 
