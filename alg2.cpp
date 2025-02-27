@@ -45,7 +45,7 @@ vector<int> Gerador_De_Vetor2(int tamanho){
     return v;
 }
 
-int NumeroMaisRepetidoNaive(vector<int>& vetor, int tamanho){
+int NumeroMaximalForcaBruta(vector<int>& vetor, int tamanho){
     int NumeroMaisRepetido = 0;
     int ContadorTotal = 0;
 
@@ -57,7 +57,7 @@ int NumeroMaisRepetidoNaive(vector<int>& vetor, int tamanho){
             {
                 if(vetor[j] == vetor[i]) ContadorAtual++;
             }
-            if(ContadorAtual > ContadorTotal)
+            if(ContadorAtual >= ContadorTotal)
             {
                 ContadorTotal = ContadorAtual;
                 NumeroMaisRepetido = vetor[i];
@@ -68,7 +68,7 @@ int NumeroMaisRepetidoNaive(vector<int>& vetor, int tamanho){
 }
 
 
-int NumeroMaisRepetidoDivAndConquer(vector<int>& vetor, int inicio, int fim) {
+int NumeroMaximalDivAndConquer(vector<int>& vetor, int inicio, int fim) {
     // Caso base: Se há apenas um elemento
     if (inicio == fim) {
         return vetor[inicio];
@@ -106,16 +106,16 @@ int main()
 
         vector<int> v = Gerador_De_Vetor(n);
 
-        clock_t inicioNaive = clock();
-        int resultadoNaive = NumeroMaisRepetidoNaive(v, n);
-        clock_t fimNaive = clock();
-        double tempoNaiveSeg = double(fimNaive - inicioNaive) / CLOCKS_PER_SEC;
+        clock_t inicioForcaBruta = clock();
+        int resultadoForcaBruta = NumeroMaximalForcaBruta(v, n);
+        clock_t fimForcaBruta = clock();
+        double tempoForcaBrutaSeg = double(fimForcaBruta - inicioForcaBruta) / CLOCKS_PER_SEC;
 
-        cout << "Metodo | Resultado | Tempo (segundos) | Tempo (milissegundos)" << endl;
-        cout << "Ingenuo | " << resultadoNaive << " | " << tempoNaiveSeg << endl;
+        cout << "Metodo | Resultado | Tempo (segundos)" << endl;
+        cout << "Forca Bruta | " << resultadoForcaBruta << " | " << tempoForcaBrutaSeg << endl;
 
         clock_t inicioDAC = clock();
-        int resultadoDAC = NumeroMaisRepetidoDivAndConquer(v, 0, n - 1);
+        int resultadoDAC = NumeroMaximalDivAndConquer(v, 0, n - 1);
         clock_t fimDAC = clock();
         double tempoDACSeg = double(fimDAC - inicioDAC) / CLOCKS_PER_SEC;
 
