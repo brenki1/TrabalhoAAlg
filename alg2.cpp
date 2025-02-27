@@ -76,8 +76,8 @@ int NumeroMaximalDivAndConquer(vector<int>& vetor, int inicio, int fim) {
 
     // Dividir o vetor em duas metades
     int meio = inicio + (fim - inicio) / 2;
-    int numeroEsquerda = NumeroMaisRepetidoDivAndConquer(vetor, inicio, meio);
-    int numeroDireita = NumeroMaisRepetidoDivAndConquer(vetor, meio + 1, fim);
+    int numeroEsquerda = NumeroMaximalDivAndConquer(vetor, inicio, meio);
+    int numeroDireita = NumeroMaximalDivAndConquer(vetor, meio + 1, fim);
 
     // Contar as ocorrências de cada número nas duas metades
     int contadorEsquerda = 0, contadorDireita = 0;
