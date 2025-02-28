@@ -36,39 +36,30 @@ vector<int> Gerador_De_Vetor(int tamanho){
     return Vetor;
 }
 
-vector<int> Gerador_De_Vetor2(int tamanho){
-    vector<int> v;
-    srand(time(NULL));
-    for(int i = 0; i < tamanho;i++){
-        v.push_back(rand()%100);
-    }
-    return v;
-}
 
-int NumeroMaximalForcaBruta(vector<int>& vetor, int tamanho){
+int NumeroMaisRepetidoIterativo(vector<int>& vetor, int tamanho){
     int NumeroMaisRepetido = 0;
     int ContadorTotal = 0;
 
     for(int i = 0; i < tamanho; i++)
     {
         int ContadorAtual = 1;
-       
+
             for(int j = i + 1; j < tamanho; j++)
             {
                 if(vetor[j] == vetor[i]) ContadorAtual++;
             }
-            if(ContadorAtual >= ContadorTotal)
+            if(ContadorAtual > ContadorTotal)
             {
                 ContadorTotal = ContadorAtual;
                 NumeroMaisRepetido = vetor[i];
             }
-        
+
     }
     return NumeroMaisRepetido;
 }
 
-
-int NumeroMaximalDivAndConquer(vector<int>& vetor, int inicio, int fim) {
+int NumeroMaisRepetidoDivAndConquer(vector<int>& vetor, int inicio, int fim) {
     // Caso base: Se há apenas um elemento
     if (inicio == fim) {
         return vetor[inicio];
@@ -76,8 +67,8 @@ int NumeroMaximalDivAndConquer(vector<int>& vetor, int inicio, int fim) {
 
     // Dividir o vetor em duas metades
     int meio = inicio + (fim - inicio) / 2;
-    int numeroEsquerda = NumeroMaximalDivAndConquer(vetor, inicio, meio);
-    int numeroDireita = NumeroMaximalDivAndConquer(vetor, meio + 1, fim);
+    int numeroEsquerda = NumeroMaisRepetidoDivAndConquer(vetor, inicio, meio);
+    int numeroDireita = NumeroMaisRepetidoDivAndConquer(vetor, meio + 1, fim);
 
     // Contar as ocorrências de cada número nas duas metades
     int contadorEsquerda = 0, contadorDireita = 0;
@@ -106,16 +97,16 @@ int main()
 
         vector<int> v = Gerador_De_Vetor(n);
 
-        clock_t inicioForcaBruta = clock();
-        int resultadoForcaBruta = NumeroMaximalForcaBruta(v, n);
-        clock_t fimForcaBruta = clock();
-        double tempoForcaBrutaSeg = double(fimForcaBruta - inicioForcaBruta) / CLOCKS_PER_SEC;
+        clock_t inicioIterativo = clock();
+        int resultadoIterativo = NumeroMaisRepetidoIterativo(v, n);
+        clock_t fimIterativo = clock();
+        double tempoIterativoSeg = double(fimIterativo - inicioIterativo) / CLOCKS_PER_SEC;
 
         cout << "Metodo | Resultado | Tempo (segundos)" << endl;
-        cout << "Forca Bruta | " << resultadoForcaBruta << " | " << tempoForcaBrutaSeg << endl;
+        cout << "Iterativo | " << resultadoIterativo << " | " << tempoIterativoSeg << endl;
 
         clock_t inicioDAC = clock();
-        int resultadoDAC = NumeroMaximalDivAndConquer(v, 0, n - 1);
+        int resultadoDAC = NumeroMaisRepetidoDivAndConquer(v, 0, n - 1);
         clock_t fimDAC = clock();
         double tempoDACSeg = double(fimDAC - inicioDAC) / CLOCKS_PER_SEC;
 
